@@ -6,7 +6,7 @@ module.exports = class extends Map {
 		super();
 
 		this.client = client;
-		this.directory = `${directoryName(require.main.filename)}\\${directory}`;
+		this.directory = `${directoryName(require.main.filename)}/${directory}`;
 	}
 
 	set(name, piece) {
@@ -28,7 +28,7 @@ module.exports = class extends Map {
 		for (const fileName of readDirectory(directory)) {
 			const [commandName, extension] = fileName.split('.');
 			if (commandName && extension) {
-				const filePath = `${directory}\\${fileName}`;
+				const filePath = `${directory}/${fileName}`;
 				try {
 					const command = new (require(filePath))(this.client);
 					this.set(command);
@@ -36,7 +36,7 @@ module.exports = class extends Map {
 				} catch (error) {
 					this.client.console.error(`Failed to load ${commandName} (${filePath}).\n${error.stack || error}`);
 				}
-			} else this.walkFiles(`${directory}\\${fileName}`);
+			} else this.walkFiles(`${directory}/${fileName}`);
 		}
 	}
 };

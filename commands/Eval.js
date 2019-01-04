@@ -75,7 +75,7 @@ If the output is too large, it'll send the output as a file, or in the console i
             .then(body => body.key).catch(console.log);
             return `The output was too long, uploaded on ${to}: https://${to}/${key}`;
         }
-        catch {
+        catch (e) {
             this.upload('hastebin', logs, true);
         }
     }

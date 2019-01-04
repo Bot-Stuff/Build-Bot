@@ -35,7 +35,7 @@ module.exports = class extends require('../structures/Command') {
             .then(body => body.key).catch(console.log);
             return `The output was too long, uploaded on ${to}: https://${to}/${key}`;
         }
-        catch {
+        catch (e) {
             this.upload('hastebin', logs, true);
         }
     }
